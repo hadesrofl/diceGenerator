@@ -1,35 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<?php
+
+/**
+ * Author: Rene Kremer
+ * Date: 19.08.15
+ * Time: 15:20
+ */
+class Template
+{
+    private $head = '<html><head>
+        <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="author" content="Rene">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
     <title>Random Dice Generator</title>
-</head>
-<link rel="apple-touch-icon" sizes="32x32" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="32x32" href="img/favicon.png">
 <link rel="icon" sizes="16x16" href="img/favicon.png">
 <link rel="stylesheet" href="style.css"/>
-<h1>Random Dice Generator</h1>
-
-<body>
-<div id="container">
-    <div id="content">
-        <p>This app rolls a given number of d6 dices</p>
-
-        <form action="dice.php" method="post">
-            <p>Number of dices: <input name="dices"/></p>
-
-            <p><input type="submit"/>
-                <input type="reset"/></p>
-        </form>
-    </div>
-    <div id="footer">
-        &copy by Rene Kremer 2015
-    </div>
-    <div id="follow">
+</head>';
+    private $header = '<h1>Random Dice Generator</h1>';
+    private $footer = '<footer>&copy by Rene Kremer 2015</footer></body></html>';
+    private $follow = '<div id="follow">
     <ul>
         <li>
             <a href="https://www.facebook.com/rene.hl90">
@@ -52,7 +44,22 @@
             </a>
         </li>
     </ul>
-</div>
-</div>
-</body>
-</html>
+</div>';
+
+    function head (){
+        echo $this->head;
+    }
+    function header(){
+        echo $this->header;
+    }
+    function footer(){
+        echo $this->footer;
+    }
+    function follow(){
+        echo $this->follow;
+    }
+    function content($content){
+        echo '<div id="content">' . $content . '</div>';
+    }
+}
+?>

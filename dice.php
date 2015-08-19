@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="">
-    <meta name="author" content="Rene">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0">
-    <title>Random Dice Generator</title>
-</head>
-<link rel="stylesheet" href="style.css"/>
-<link rel="apple-touch-icon" sizes="32x32" href="img/favicon.png">
-<link rel="icon" sizes="16x16" href="img/favicon.png"
-">
-<h1>Random Dice Generator</h1>
-
-<body>
-<p>This app rolls a given number of d6 dices</p>
-
-<div id
-"container">
-<div id="content">
-    <?php
-    /**
-     * Created by PhpStorm.
-     * User: Rene
-     * Date: 09.08.2015
-     * Time: 14:40
-     */
-
+<?php
+/**
+ * Author: Rene Kremer
+ * Date: 19.08.15
+ * Time: 15:52
+ */
+include 'template.class.php';
+$template = new Template();
+$template->header();
+$template->head();
     $currentValue = 0;
     $numberOfDices = $_POST["dices"];
     $total = 0;
@@ -82,7 +61,7 @@
             echo "</tr>";
         }
         echo "</table>";
-        $avg = $total / $numberOfDices;
+        $avg = round($total / $numberOfDices,2);
         echo "<table>";
         echo "<tr><td>Number of Dices: </td><td>" . $numberOfDices . "</td></tr>";
         echo "<tr><td>Total sum: </td><td> " . $total . "</td></tr>";
@@ -90,7 +69,7 @@
         echo "</table>";
         echo "<form action='dice.php' method='post'>";
         echo "<button type='submit' name='dices' value=$numberOfDices>reroll</button>";
-        echo "<a href='index.html'><button type='button'>back</button></a></p>";
+        echo "<a href='index.php'><button type='button'>back</button></a></p>";
         echo "</form>";
     } else {
         echo "<p id='error'>Wrong Number of Dices to roll. Please enter a valid Number of dices to roll ( > 0)</p>";
@@ -100,35 +79,6 @@
         echo "<input type='reset'/></p>";
         echo "</form>";
     }
-    ?>
-</div>
-<div id="footer">
-    <footer>&copy by Rene Kremer 2015</footer>
-</div>
-<div id="follow">
-    <ul>
-        <li>
-            <a href="https://www.facebook.com/rene.hl90">
-                <img src="img/Facebook.ico" width="64px" height="64px">
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/hadesrofl">
-                <img src="img/Github.ico" width="64px" height="64px">
-            </a>
-        </li>
-        <li>
-            <a href="https://twitter.com/_Rene_Kremer">
-                <img src="img/Twitter.ico" width="64px" height="64px">
-            </a>
-        </li>
-        <li>
-            <a href="https://www.xing.com/profile/Rene_Kremer3">
-                <img src="img/Xing.ico" width="64px" height="64px">
-            </a>
-        </li>
-    </ul>
-</div>
-</div>
-</body>
-</html>
+$template->follow();
+$template->footer();
+?>
