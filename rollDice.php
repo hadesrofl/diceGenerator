@@ -20,7 +20,7 @@ if(isset($_GET["dice"]) || isset($_GET["numberOfDices"])){
     echo file_get_contents("templates/errorWrongDice.tpl");
     return false;
 }
-if($template->showDice($value)){
+if(!$dice->wrongDice && $template->showDice($value)){
     $dice->roll();
 }
 

@@ -37,7 +37,7 @@ class Dice
     /**
      * @var bool $wrongDice is a bool to determine if the entered dice is one of the accepted types
      */
-    private $wrongDice = false;
+    public $wrongDice = false;
 
     /**
      * Constructor of the dice object
@@ -47,17 +47,23 @@ class Dice
      */
     function __construct($dice = "d6", $numberOfDices = "1")
     {
-        $this->numberOfDices = $numberOfDices;
-        if ($dice == "d4" || $dice == "d6" || $dice == "d8" || $dice == "d10" || $dice == "d12" || $dice == "d20" || $dice == "d100") {
-            $this->dice = substr($dice, 1);
+        if (is_numeric($numberOfDices)) {
+            $this->numberOfDices = $numberOfDices;
+            if ($dice == "d4" || $dice == "d6" || $dice == "d8" || $dice == "d10" || $dice == "d12" || $dice == "d20" || $dice == "d100") {
+                $this->dice = substr($dice, 1);
+            } else {
+                echo file_get_contents("templates/errorWrongDice.tpl");
+                $this->wrongDice = true;
+            }
+            for ($i = 0; $i < $this->rows; $i++) {
+                echo "</tr>";
+            }
+            echo "</table>";
         } else {
-            echo file_get_contents("templates/errorWrongDice.tpl");
+            echo file_get_contents("templates/errorNumberOfDices.tpl");
             $this->wrongDice = true;
         }
-        for ($i = 0; $i < $this->rows; $i++) {
-            echo "</tr>";
-        }
-        echo "</table>";
+
     }
 
     /**
@@ -70,12 +76,12 @@ class Dice
             if ($this->numberOfDices > 0 && $this->numberOfDices <= 20) {
                 for ($i = 0; $i < $this->numberOfDices; $i++) {
                     $currentValue = rand(1, $this->dice);
-                        $listOfValues[$i] = $currentValue;
+                    $listOfValues[$i] = $currentValue;
                     $this->total += $currentValue;
                 }
                 if ($this->dice == 6) {
                     $this->showD6($listOfValues);
-                }else {
+                } else {
                     $this->showResults($listOfValues);
                 }
                 $avg = round($this->total / $this->numberOfDices, 2);
@@ -100,65 +106,66 @@ class Dice
      * @return bool determinates if the function worked correctly or had an error
      * @access public
      */
-        function showD6($listOfValues)
-        {
-            echo "<table>";
-            foreach ($listOfValues as $values) {
-                $error = FALSE;
-                if ($this->cells == 0 || $this->cells % 5 == 0) {
-                    echo "<tr>";
-                    $this->rows++;
-                }
-                switch ($values) {
-                    case "1":
-                        echo "<td><img src=" . $this->imgDir . "one.png  width = '64px' height='64px'/></td>";
-                        break;
-                    case "2":
-                        echo "<td><img src=" . $this->imgDir . "two.png  width = '64px' height='64px'/></td>";
-                        break;
-                    case "3":
-                        echo "<td><img src=" . $this->imgDir . "three.png  width = '64px' height='64px'/></td>";
-                        break;
-                    case "4":
-                        echo "<td><img src=" . $this->imgDir . "four.png  width = '64px' height='64px'/></td>";
-                        break;
-                    case "5":
-                        echo "<td><img src=" . $this->imgDir . "five.png  width = '64px' height='64px'/></td>";
-                        break;
-                    case "6":
-                        echo "<td><img src=" . $this->imgDir . "six.png  width = '64px' height='64px'/></td>";
-                        break;
-                    default:
-                        $error = TRUE;
-                        echo file_get_contents("templates/errorImage.tpl");
-                        break;
-                }
-                if (!$error) {
-                    $this->cells++;
-                } else {
-                    return false;
-                }
+    function showD6($listOfValues)
+    {
+        echo "<table>";
+        foreach ($listOfValues as $values) {
+            $error = FALSE;
+            if ($this->cells == 0 || $this->cells % 5 == 0) {
+                echo "<tr>";
+                $this->rows++;
+            }
+            switch ($values) {
+                case "1":
+                    echo "<td><img src=" . $this->imgDir . "one.png  width = '64px' height='64px'/></td>";
+                    break;
+                case "2":
+                    echo "<td><img src=" . $this->imgDir . "two.png  width = '64px' height='64px'/></td>";
+                    break;
+                case "3":
+                    echo "<td><img src=" . $this->imgDir . "three.png  width = '64px' height='64px'/></td>";
+                    break;
+                case "4":
+                    echo "<td><img src=" . $this->imgDir . "four.png  width = '64px' height='64px'/></td>";
+                    break;
+                case "5":
+                    echo "<td><img src=" . $this->imgDir . "five.png  width = '64px' height='64px'/></td>";
+                    break;
+                case "6":
+                    echo "<td><img src=" . $this->imgDir . "six.png  width = '64px' height='64px'/></td>";
+                    break;
+                default:
+                    $error = TRUE;
+                    echo file_get_contents("templates/errorImage.tpl");
+                    break;
+            }
+            if (!$error) {
+                $this->cells++;
+            } else {
+                return false;
             }
         }
+    }
 
     /**
      * Shows the results of every single roll in a table
      * @param $listOfValues is the list of values of every single roll
      */
-    function showResults($listOfValues){
+    function showResults($listOfValues)
+    {
         echo "<p>The Results are: </p>";
         echo "<table>";
         foreach ($listOfValues as $values) {
-            if($this->cells % 5 == 0){
+            if ($this->cells % 5 == 0) {
                 echo "<tr>";
                 $this->rows++;
             }
             echo "<td class='result'>" . $values . "</td>";
             $this->cells++;
         }
-        for ($i = 0; $i < $this->rows;$i++){
+        for ($i = 0; $i < $this->rows; $i++) {
             echo "</tr>";
         }
         echo "</table>";
     }
-    }
+}
