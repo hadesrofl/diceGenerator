@@ -1,1 +1,1 @@
-<footer>&copy by Rene Kremer 2015</footer></body></html>
+<footer>Version 1.0  &copy by Rene Kremer 2015</footer></body></html>
