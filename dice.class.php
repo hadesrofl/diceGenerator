@@ -3,8 +3,9 @@
 /**
  * Created by PhpStorm.
  * User: renej
- * Date: 19.08.2015
- * Time: 18:42
+ * Date: 20.08.2015
+ * Time: 13:27
+ * Version: 1.0
  *
  * Description: This Class represents a dice of the following types: d4, d6, d8, d10, d12, d20, d100
  */

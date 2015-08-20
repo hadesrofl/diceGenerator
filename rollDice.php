@@ -1,8 +1,11 @@
 <?php
 /**
  * Author: Rene Kremer
- * Date: 19.08.15
- * Time: 15:52
+ * Date: 20.08.15
+ * Time: 13:27
+ * Version 1.0
+ *
+ * Description: Main App to roll the dices
  */
 include 'templates/template.class.php';
 include "dice.class.php";

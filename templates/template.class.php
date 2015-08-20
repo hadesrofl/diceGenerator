@@ -2,8 +2,10 @@
 
 /**
  * Author: Rene Kremer
- * Date: 19.08.15
- * Time: 15:20
+ * Date: 20.08.15
+ * Time: 13:27
+ * Version: 1.0
+ *
  * Description: A Template for the whole App
  */
 class Template
