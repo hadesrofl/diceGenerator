@@ -48,7 +48,9 @@ class Dice
      */
     function __construct($dice = "d6", $numberOfDices = "1")
     {
-        if (is_numeric($numberOfDices)) {
+        if (!is_numeric($numberOfDices)) {
+            $numberOfDices = 1;
+        }
             $this->numberOfDices = $numberOfDices;
             if ($dice == "d4" || $dice == "d6" || $dice == "d8" || $dice == "d10" || $dice == "d12" || $dice == "d20" || $dice == "d100") {
                 $this->dice = substr($dice, 1);
@@ -60,11 +62,6 @@ class Dice
                 echo "</tr>";
             }
             echo "</table>";
-        } else {
-            echo file_get_contents("templates/errorNumberOfDices.tpl");
-            $this->wrongDice = true;
-        }
-
     }
 
     /**

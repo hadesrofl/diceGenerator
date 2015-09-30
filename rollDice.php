@@ -20,7 +20,7 @@ if(isset($_GET["dice"]) || isset($_GET["numberOfDices"])){
     $dice = new Dice($_POST["dice"], $_POST{"numberOfDices"});
     $value = $_POST["dice"];
 }else{
-    echo file_get_contents("templates/errorWrongDice.tpl");
+    //echo file_get_contents("templates/errorWrongDice.tpl");
     return false;
 }
 if(!$dice->wrongDice && $template->showDice($value)){

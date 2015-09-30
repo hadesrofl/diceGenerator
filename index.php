@@ -16,7 +16,7 @@ $template->setContent('<p>This app rolls a given number of dices</p>
         <table>
             <tr>
                 <td>Number of Dices:</td>
-                <td><input name="numberOfDices"/></td>
+                <td><input name="numberOfDices" placeholder="Default is 1"/></td>
             </tr>
             </table>
             <table>
